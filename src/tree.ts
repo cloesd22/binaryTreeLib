@@ -4,6 +4,7 @@ export class Tree{
 
     treeArray:Node[];
     rootNode:Node|null;
+    //tempEdgeNode:Node;
 
     constructor(){
         this.treeArray = [];
@@ -18,6 +19,8 @@ export class Tree{
         }
     
         if (this.rootNode){
+            this.findPlace(newNode,this.rootNode);
+
             var place = this.findPlace(newNode,this.rootNode);
 
             if(newNode.repValue >= place.repValue){
@@ -29,24 +32,24 @@ export class Tree{
             this.treeArray.push(newNode);
         }
         
-        
     }
 
-    findPlace(seekingNode:Node,LatestNode:Node){
-
+    findPlace(seekingNode:Node,LatestNode:Node):Node{
+        
         if(seekingNode.repValue >= LatestNode.repValue){
             if (LatestNode.rightChild==null){
+   
                 return LatestNode;
             }
-            this.findPlace(seekingNode,LatestNode.rightChild)
+            return this.findPlace(seekingNode,LatestNode.rightChild)
         }else if (seekingNode.repValue < LatestNode.repValue){
             if (LatestNode.leftChild==null){
+
                 return LatestNode;
             }
-            this.findPlace(seekingNode,LatestNode.leftChild)
+            return this.findPlace(seekingNode,LatestNode.leftChild)
         }
-
-        return this.rootNode;
+        return LatestNode;
     }
 
 }

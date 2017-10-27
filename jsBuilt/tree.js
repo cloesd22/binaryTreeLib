@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Tree = /** @class */ (function () {
+    //tempEdgeNode:Node;
     function Tree() {
         this.treeArray = [];
         this.rootNode = null;
@@ -12,6 +13,7 @@ var Tree = /** @class */ (function () {
             return;
         }
         if (this.rootNode) {
+            this.findPlace(newNode, this.rootNode);
             var place = this.findPlace(newNode, this.rootNode);
             if (newNode.repValue >= place.repValue) {
                 place.rightChild = newNode;
@@ -28,15 +30,15 @@ var Tree = /** @class */ (function () {
             if (LatestNode.rightChild == null) {
                 return LatestNode;
             }
-            this.findPlace(seekingNode, LatestNode.rightChild);
+            return this.findPlace(seekingNode, LatestNode.rightChild);
         }
         else if (seekingNode.repValue < LatestNode.repValue) {
             if (LatestNode.leftChild == null) {
                 return LatestNode;
             }
-            this.findPlace(seekingNode, LatestNode.leftChild);
+            return this.findPlace(seekingNode, LatestNode.leftChild);
         }
-        return this.rootNode;
+        return LatestNode;
     };
     return Tree;
 }());
