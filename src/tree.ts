@@ -19,9 +19,9 @@ export class Tree{
         }
     
         if (this.rootNode){
-            this.findPlace(newNode,this.rootNode);
+            this.findPlace(newNode.repValue,this.rootNode);
 
-            var place = this.findPlace(newNode,this.rootNode);
+            var place = this.findPlace(newNode.repValue,this.rootNode);
 
             if(newNode.repValue >= place.repValue){
                 place.rightChild = newNode;
@@ -34,22 +34,36 @@ export class Tree{
         
     }
 
-    findPlace(seekingNode:Node,LatestNode:Node):Node{
+    findPlace(seekingValue:number|string,LatestNode:Node):Node{
         
-        if(seekingNode.repValue >= LatestNode.repValue){
+        if(seekingValue >= LatestNode.repValue){
             if (LatestNode.rightChild==null){
    
                 return LatestNode;
             }
-            return this.findPlace(seekingNode,LatestNode.rightChild)
-        }else if (seekingNode.repValue < LatestNode.repValue){
+            return this.findPlace(seekingValue,LatestNode.rightChild)
+        }else if (seekingValue < LatestNode.repValue){
             if (LatestNode.leftChild==null){
 
                 return LatestNode;
             }
-            return this.findPlace(seekingNode,LatestNode.leftChild)
+            return this.findPlace(seekingValue,LatestNode.leftChild)
         }
         return LatestNode;
+    }
+
+    find(searchTerm:number|string){
+        if (this.rootNode){
+            var place = this.findPlace(searchTerm,this.rootNode);
+            if(place.repValue==searchTerm){
+                return place;
+            }else{
+                return false;
+            }
+        }else{
+            console.log("Tree is empty");
+        }
+        
     }
 
 }

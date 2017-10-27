@@ -13,8 +13,8 @@ var Tree = /** @class */ (function () {
             return;
         }
         if (this.rootNode) {
-            this.findPlace(newNode, this.rootNode);
-            var place = this.findPlace(newNode, this.rootNode);
+            this.findPlace(newNode.repValue, this.rootNode);
+            var place = this.findPlace(newNode.repValue, this.rootNode);
             if (newNode.repValue >= place.repValue) {
                 place.rightChild = newNode;
             }
@@ -25,20 +25,34 @@ var Tree = /** @class */ (function () {
             this.treeArray.push(newNode);
         }
     };
-    Tree.prototype.findPlace = function (seekingNode, LatestNode) {
-        if (seekingNode.repValue >= LatestNode.repValue) {
+    Tree.prototype.findPlace = function (seekingValue, LatestNode) {
+        if (seekingValue >= LatestNode.repValue) {
             if (LatestNode.rightChild == null) {
                 return LatestNode;
             }
-            return this.findPlace(seekingNode, LatestNode.rightChild);
+            return this.findPlace(seekingValue, LatestNode.rightChild);
         }
-        else if (seekingNode.repValue < LatestNode.repValue) {
+        else if (seekingValue < LatestNode.repValue) {
             if (LatestNode.leftChild == null) {
                 return LatestNode;
             }
-            return this.findPlace(seekingNode, LatestNode.leftChild);
+            return this.findPlace(seekingValue, LatestNode.leftChild);
         }
         return LatestNode;
+    };
+    Tree.prototype.find = function (searchTerm) {
+        if (this.rootNode) {
+            var place = this.findPlace(searchTerm, this.rootNode);
+            if (place.repValue == searchTerm) {
+                return place;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            console.log("Tree is empty");
+        }
     };
     return Tree;
 }());

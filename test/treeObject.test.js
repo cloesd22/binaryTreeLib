@@ -126,4 +126,46 @@ describe('Tree object functionality test', () => {
     
     });
 
+    it('Should be able to return an object if it exists in the tree', () => {
+        
+
+        var mooer = new cow("mook",5,33);
+        var repvalue = mooer.ID;
+
+        var mooer2 = new cow("Hoofs",2,45);
+        var repvalue2 = mooer2.ID;
+
+        var mooer3 = new cow("bells",6,21);
+        var repvalue3 = mooer3.ID;
+
+        var mooer4 = new cow("edge",8,15);
+        var repvalue4 = mooer4.ID;
+
+        var mooer5 = new cow("fencer",1,68);
+        var repvalue5 = mooer5.ID;
+
+        var mooer6 = new cow("tank",0,85);
+        var repvalue6 = mooer6.ID;
+
+        var mooerNode = new Node(mooer,repvalue);//33
+        var mooerNode2 = new Node(mooer2,repvalue2);//45
+        var mooerNode3 = new Node(mooer3,repvalue3);//21
+        var mooerNode4 = new Node(mooer4,repvalue4);//15
+        var mooerNode5 = new Node(mooer5,repvalue5);//68
+        var mooerNode6 = new Node(mooer6,repvalue6);///85
+        
+        var tree = new Tree();
+
+        tree.add(mooerNode);
+        tree.add(mooerNode2);
+        tree.add(mooerNode3);
+        tree.add(mooerNode4);
+        tree.add(mooerNode5);
+        tree.add(mooerNode6);
+
+        expect(tree.find(15).id).to.be.equal(mooer4.id)
+        expect(tree.find(33).id).to.be.equal(mooer.id)
+        expect(tree.find(68).id).to.be.equal(mooer5.id)
+    });
+
 });
